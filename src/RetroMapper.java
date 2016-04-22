@@ -28,7 +28,7 @@ public class RetroMapper {
 		baseLocalURL = System.getProperty("user.dir");
 		try {
 			mapper.map();
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -83,16 +83,19 @@ public class RetroMapper {
 		return sb.toString();
 	}
 	
-	private void map() throws IOException {
+	private void map() throws IOException, InterruptedException {
 		String outDir = baseLocalURL + "\\out";
 		String dataDir = baseLocalURL + "\\data";
 		
-		Collection<File> events = FileUtils.listFiles(new File(dataDir), TrueFileFilter.INSTANCE, DirectoryFileFilter.DIRECTORY);
+		File dataDirFile = new File(dataDir);
+		if (!dataDirFile.exists()) {
+			dataDirFile = new File(baseLocalURL + "\\..\\data");
+		}
+		
+		print("Outputting to " + outDir);
+		Thread.sleep(2000);
+		Collection<File> events = FileUtils.listFiles(dataDirFile, TrueFileFilter.INSTANCE, DirectoryFileFilter.DIRECTORY);
 		for (File file : events) {
-
-			if (file.getName().equals("1943BOS.EVA")) {
-			print("v");
-			}
 			String ext = FilenameUtils.getExtension(file.getName());
 			File outFile = new File(outDir + "\\" + file.getName().replace("."+ext, "") + ".json");
 			if (ext.equals("ROS")) continue;
