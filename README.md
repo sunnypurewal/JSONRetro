@@ -11,9 +11,9 @@ If you have Java installed and use Windows:
 
 1. [Download Retrosheet event files](http://www.retrosheet.org/game.htm)
 
-2. Place the files into JSONRetro/data'
+2. Place the files into JSONRetro/data
 
-3. Open command prompt (Windows+R "cmd"+Enter)'
+3. Open command prompt (Windows+R "cmd"+Enter)
 
 4. navigate to JSONRetro/bin
 
