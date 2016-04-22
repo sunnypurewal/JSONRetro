@@ -46,6 +46,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# JSONRetro
+JSONRetro
 out
-data
+bin/out
