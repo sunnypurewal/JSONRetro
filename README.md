@@ -9,9 +9,9 @@ If you **do not hava Java installed**:
 
 If you have Java installed and use Windows:
 
-1. [Download Retrosheet event files archives](http://www.retrosheet.org/game.htm)
+1. [Download Retrosheet event files](http://www.retrosheet.org/game.htm)
 
-2. Extract the files into JSONRetro/data
+2. Extract the archives into JSONRetro/data
 
 3. Open command prompt (Windows+R "cmd"+Enter)
 
