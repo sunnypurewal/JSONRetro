@@ -20,3 +20,9 @@ If you have Java installed and use Windows:
 5. java -jar JSONRetro.jar
 
 That will generate the .json files into JSONRetro/bin/out
+
+
+
+NOTES:
+
+This generator ignores all lines in a Retrosheet file starting with com,ladj,badj,padj and version.
