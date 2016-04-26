@@ -36,13 +36,13 @@ public class RetroMapper {
 	
 	private String getJSONFromStartRecord(CSVRecord record) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("{\"start\":{");
+		sb.append("{");
 		sb.append("\"key_retro\":\"" + record.get(1) + "\"");
 		sb.append(",\"name\":\"" + record.get(2) + "\"");
 		sb.append(",\"team\":" + record.get(3));
 		sb.append(",\"order\":" + record.get(4));
 		sb.append(",\"position\":" + record.get(5));
-		sb.append("}}");
+		sb.append("}");
 		return sb.toString();
 	}
 	private String getJSONFromSubRecord(CSVRecord record) {
@@ -75,11 +75,11 @@ public class RetroMapper {
 	}
 	private String getJSONFromDataRecord(CSVRecord record) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("{\"datum\":{");
+		sb.append("{");
 		sb.append("\"type\":\"" + record.get(1) + "\"");
 		sb.append(",\"key_retro\":\"" + record.get(2) + "\"");
 		sb.append(",\"value\":" + record.get(3));
-		sb.append("}}");
+		sb.append("}");
 		return sb.toString();
 	}
 	
@@ -105,7 +105,7 @@ public class RetroMapper {
 				CSVParser parser = CSVFormat.EXCEL.parse(reader);
 				List<CSVRecord> records = parser.getRecords();
 				StringBuilder sb = new StringBuilder();
-				sb.append("{\"games\":[");
+				sb.append("{\"game\":[");
 				Iterator<CSVRecord> it = records.iterator();
 				int i = 0;
 				if (!it.hasNext()) {
@@ -116,9 +116,9 @@ public class RetroMapper {
 					String key = record.get(0);
 					if (key.equals("id")) {
 						if (i > 0) {
-							sb.append("},");
+							sb.append(",");
 						}
-						sb.append("{\"game\":{\"id\":\"" + record.get(1) + "\"");
+						sb.append("{\"id\":\"" + record.get(1) + "\"");
 						it.next();
 						sb.append(",\"info\":{");
 						int j = 0;
@@ -162,7 +162,7 @@ public class RetroMapper {
 					else record = it.next();
 					i++;
 				}
-				sb.append("}]}");
+				sb.append("]}");
 				FileUtils.writeStringToFile(outFile, sb.toString());
 				print("Finished writing " + outFile.getName());
 				sb.setLength(0);
