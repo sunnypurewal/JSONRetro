@@ -14,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.apache.commons.lang3.SystemUtils;
 
 public class RetroMapper {
 	
@@ -25,7 +26,8 @@ public class RetroMapper {
 	public static void main(String[] args) {
 		RetroMapper mapper = new RetroMapper();
 		
-		baseLocalURL = System.getProperty("user.dir");
+		baseLocalURL = getOSPath(System.getProperty("user.dir"));
+		print("Output can be found at:\n" + baseLocalURL);
 		try {
 			mapper.map();
 		} catch (IOException | InterruptedException e) {
@@ -84,12 +86,12 @@ public class RetroMapper {
 	}
 	
 	private void map() throws IOException, InterruptedException {
-		String outDir = baseLocalURL + "\\out";
-		String dataDir = baseLocalURL + "\\data";
+		String outDir = getOSPath(baseLocalURL + "\\out");
+		String dataDir = getOSPath(baseLocalURL + "\\data");
 		
 		File dataDirFile = new File(dataDir);
 		if (!dataDirFile.exists()) {
-			dataDirFile = new File(baseLocalURL + "\\..\\data");
+			dataDirFile = new File(getOSPath(baseLocalURL + "\\..\\data"));
 		}
 		
 		print("Outputting to " + outDir);
@@ -168,5 +170,10 @@ public class RetroMapper {
 				sb.setLength(0);
 			}
 		}
+	}
+
+	private static String getOSPath(String path) {
+		if (SystemUtils.IS_OS_MAC) return path.replaceAll("\\", "/");
+		else return path;
 	}
 }
